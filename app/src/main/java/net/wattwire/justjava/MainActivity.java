@@ -12,7 +12,7 @@ package net.wattwire.justjava;
  */
 public class MainActivity extends ActionBarActivity {
 
-    int quantity = 13;
+    int quantity = 16;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
