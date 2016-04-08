@@ -18,7 +18,7 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        display(quantity);
+        displayQuantity(quantity);
 
     }
 
@@ -27,7 +27,10 @@ public class MainActivity extends ActionBarActivity {
      */
     public void submitOrder(View view) {
 
-        int price = quantity * 5;
+        int pricePerCup = 5;
+
+        int price = calculatePrice();
+
         String priceMessage = "Amount due: $" + price + ".00 \nThank You!";
         displayMessage(priceMessage);
 
@@ -35,7 +38,7 @@ public class MainActivity extends ActionBarActivity {
 
     public void increment(View view) {
         quantity++;
-        display(quantity);
+        displayQuantity(quantity);
     }
 
     public void decrement(View view) {
@@ -44,16 +47,16 @@ public class MainActivity extends ActionBarActivity {
             quantity--;
         }
 
-        display(quantity);
+        displayQuantity(quantity);
     }
 
     /**
      * This method displays the given quantity value on the screen.
      */
-    private void display(int number) {
+    private void displayQuantity(int numOrders) {
         TextView quantityTextView = (TextView) findViewById(
                 R.id.quantity_text_view);
-        quantityTextView.setText("" + number);
+        quantityTextView.setText("" + numOrders);
     }
 
     /**
@@ -70,6 +73,16 @@ public class MainActivity extends ActionBarActivity {
     private void displayMessage(String message) {
         TextView priceTextView = (TextView) findViewById(R.id.price_text_view);
         priceTextView.setText(message);
+
+    }
+    /**
+     * Calculates the price of the order.
+     *
+     * @param quantity is the number of cups of coffee ordered
+     */
+    private int calculatePrice()
+    {
+        return quantity * 5;
     }
 
 }
