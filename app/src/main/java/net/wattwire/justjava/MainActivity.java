@@ -2,7 +2,9 @@ package net.wattwire.justjava;
 
         import android.os.Bundle;
         import android.support.v7.app.ActionBarActivity;
+        import android.util.Log;
         import android.view.View;
+        import android.widget.CheckBox;
         import android.widget.TextView;
 
         import java.text.NumberFormat;
@@ -12,13 +14,14 @@ package net.wattwire.justjava;
  */
 public class MainActivity extends ActionBarActivity {
 
+    boolean wantsWhip = false;
     int quantity = 19;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        displayQuantity(quantity);
+        display(quantity);
 
     }
 
@@ -27,9 +30,12 @@ public class MainActivity extends ActionBarActivity {
      */
     public void submitOrder(View view) {
 
-        int pricePerCup = 5;
+        int price = quantity * 5;
 
-        int price = calculatePrice();
+        CheckBox wantsWhipCheckBox = (CheckBox) findViewById(R.id.whipBox);
+        boolean wantsWhip = wantsWhipCheckBox.isChecked();
+
+        Log.v("MainActivity","Has whipped cream: " + wantsWhip);
 
         String priceMessage = "Amount due: $" + price + ".00 \nThank You!";
         displayMessage(priceMessage);
@@ -38,7 +44,7 @@ public class MainActivity extends ActionBarActivity {
 
     public void increment(View view) {
         quantity++;
-        displayQuantity(quantity);
+        display(quantity);
     }
 
     public void decrement(View view) {
@@ -47,16 +53,16 @@ public class MainActivity extends ActionBarActivity {
             quantity--;
         }
 
-        displayQuantity(quantity);
+        display(quantity);
     }
 
     /**
      * This method displays the given quantity value on the screen.
      */
-    private void displayQuantity(int numOrders) {
+    private void display(int number) {
         TextView quantityTextView = (TextView) findViewById(
                 R.id.quantity_text_view);
-        quantityTextView.setText("" + numOrders);
+        quantityTextView.setText("" + number);
     }
 
     /**
@@ -73,16 +79,6 @@ public class MainActivity extends ActionBarActivity {
     private void displayMessage(String message) {
         TextView priceTextView = (TextView) findViewById(R.id.price_text_view);
         priceTextView.setText(message);
-
-    }
-    /**
-     * Calculates the price of the order.
-     *
-     * @param quantity is the number of cups of coffee ordered
-     */
-    private int calculatePrice()
-    {
-        return quantity * 5;
     }
 
 }

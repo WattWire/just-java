@@ -14,6 +14,23 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingBottom="8dp"
+        android:text="TOPPINGS"
+        android:textSize="16dp" />
+
+    <CheckBox
+        android:id="@+id/whipBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Whipped Cream"
+        android:paddingLeft="24dp"
+        android:onClick="setWantWhip"
+        android:textSize="16sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
         android:text="QUANTITY"
         android:textSize="16dp" />
 
