@@ -7,21 +7,19 @@ package net.wattwire.justjava;
         import android.widget.CheckBox;
         import android.widget.TextView;
 
-        import java.text.NumberFormat;
-
 /**
  * This app displays an order form to order coffee.
  */
 public class MainActivity extends ActionBarActivity {
 
     boolean wantsWhip = false;
-    int quantity = 19;
+    int quantity = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        display(quantity);
+        displayQuantity(quantity);
 
     }
 
@@ -37,14 +35,14 @@ public class MainActivity extends ActionBarActivity {
 
         Log.v("MainActivity","Has whipped cream: " + wantsWhip);
 
-        String priceMessage = "Amount due: $" + price + ".00 \nThank You!";
+        String priceMessage = "Amount: $" + price + ".00 \nThank You!";
         displayMessage(priceMessage);
 
     }
 
     public void increment(View view) {
         quantity++;
-        display(quantity);
+        displayQuantity(quantity);
     }
 
     public void decrement(View view) {
@@ -53,32 +51,24 @@ public class MainActivity extends ActionBarActivity {
             quantity--;
         }
 
-        display(quantity);
+        displayQuantity(quantity);
     }
 
     /**
      * This method displays the given quantity value on the screen.
      */
-    private void display(int number) {
+    private void displayQuantity(int number) {
         TextView quantityTextView = (TextView) findViewById(
                 R.id.quantity_text_view);
         quantityTextView.setText("" + number);
     }
 
     /**
-     * This method displays the given price on the screen.
-     */
-    private void displayPrice(int number) {
-        TextView priceTextView = (TextView) findViewById(R.id.price_text_view);
-        priceTextView.setText(NumberFormat.getCurrencyInstance().format(number));
-    }
-
-    /**
      * This method displays the given text on the screen.
      */
     private void displayMessage(String message) {
-        TextView priceTextView = (TextView) findViewById(R.id.price_text_view);
-        priceTextView.setText(message);
+        TextView orderSummaryTextView = (TextView) findViewById(R.id.order_summary_text_view);
+        orderSummaryTextView.setText(message);
     }
 
 }
