@@ -32,10 +32,15 @@ public class MainActivity extends ActionBarActivity {
 
         CheckBox wantsWhipCheckBox = (CheckBox) findViewById(R.id.whipBox);
         boolean wantsWhip = wantsWhipCheckBox.isChecked();
+        String whipState = "Has whipped cream: " + wantsWhip;
+        Log.v("MainActivity", whipState);
 
-        Log.v("MainActivity","Has whipped cream: " + wantsWhip);
+        CheckBox wantsChocoCheckBox = (CheckBox) findViewById(R.id.chocoBox);
+        boolean wantsChoco = wantsChocoCheckBox.isChecked();
+        String chocoState = "Wants Chocolate? " + wantsChoco;
+        Log.v("MainActivity", chocoState);
 
-        String priceMessage = "Amount: $" + price + ".00 \nThank You!";
+        String priceMessage = whipState + "\n" + chocoState + "\n" + "Amount: $" + price + ".00 \nThank You!";
         displayMessage(priceMessage);
 
     }
