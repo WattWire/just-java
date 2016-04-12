@@ -1,6 +1,8 @@
 package net.wattwire.justjava;
 
+        import android.content.Intent;
         import android.os.Bundle;
+        import android.provider.AlarmClock;
         import android.support.v7.app.ActionBarActivity;
         import android.util.Log;
         import android.view.View;
@@ -26,30 +28,45 @@ public class MainActivity extends ActionBarActivity {
         displayQuantity();
 
     }
-//----------------------------------------------------------------------
-//     * This method is called when the order button is clicked.
 
+
+//----------------------------------------------------------------------
+//     * This method is called when the ORDER button is clicked.
     public void submitOrder(View view) {
 
-        CheckBox wantsWhipCheckBox = (CheckBox) findViewById(R.id.whipBox);
-        boolean wantsWhip = wantsWhipCheckBox.isChecked();
-        String whipState = "Whipped Cream: " + wantsWhip;
+        String message = "Your Time is Up!!!";
+        int seconds = 4;
 
-        CheckBox wantsChocoCheckBox = (CheckBox) findViewById(R.id.chocoBox);
-        boolean wantsChoco = wantsChocoCheckBox.isChecked();
-        String chocoState = "Chocolate: " + wantsChoco;
+        Intent intent = new Intent(AlarmClock.ACTION_SET_TIMER)
+                .putExtra(AlarmClock.EXTRA_MESSAGE, message)
+                .putExtra(AlarmClock.EXTRA_LENGTH, seconds)
+                .putExtra(AlarmClock.EXTRA_SKIP_UI, true);
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivity(intent);
+        }
 
-        EditText editName = (EditText) findViewById(R.id.edit_text_name);
 
-        String priceMessage = "Name: " + editName.getText().toString() + "\n";
-        priceMessage += whipState + "\n";
-        priceMessage += chocoState + "\n";
-        priceMessage += "Quantity: " + quantity + "\n";
-        priceMessage += "Total: $" + calcTotal() + ".00 \n";
-        priceMessage +=  "Thank You!";
+//        CheckBox wantsWhipCheckBox = (CheckBox) findViewById(R.id.whipBox);
+//        boolean wantsWhip = wantsWhipCheckBox.isChecked();
+//        String whipState = "Whipped Cream: " + wantsWhip;
+//
+//        CheckBox wantsChocoCheckBox = (CheckBox) findViewById(R.id.chocoBox);
+//        boolean wantsChoco = wantsChocoCheckBox.isChecked();
+//        String chocoState = "Chocolate: " + wantsChoco;
+//
+//        EditText editName = (EditText) findViewById(R.id.edit_text_name);
+//
+//        String priceMessage = "Name: " + editName.getText() + "\n";
+//        priceMessage += whipState + "\n";
+//        priceMessage += chocoState + "\n";
+//        priceMessage += "Quantity: " + quantity + "\n";
+//        priceMessage += "Total: $" + calcTotal() + ".00 \n";
+//        priceMessage +=  "Thank You!";
+//
+//        TextView orderSummaryTextView = (TextView) findViewById(R.id.order_summary_text_view);
+//        orderSummaryTextView.setText(priceMessage);
 
-        TextView orderSummaryTextView = (TextView) findViewById(R.id.order_summary_text_view);
-        orderSummaryTextView.setText(priceMessage);
+
     }
 
     public int calcTotal() {
