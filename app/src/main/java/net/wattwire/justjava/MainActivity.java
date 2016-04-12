@@ -13,7 +13,8 @@ package net.wattwire.justjava;
 
 public class MainActivity extends ActionBarActivity {
 
-    boolean wantsWhip = false;
+    int orderWhip = 0;
+    int orderChoco = 0;
     boolean nameTap = false;
     int quantity = 0;
 
@@ -22,43 +23,57 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        displayQuantity(quantity);
+        displayQuantity();
 
     }
 //----------------------------------------------------------------------
-
-
 //     * This method is called when the order button is clicked.
 
     public void submitOrder(View view) {
 
-        int price = quantity * 5;
-
         CheckBox wantsWhipCheckBox = (CheckBox) findViewById(R.id.whipBox);
         boolean wantsWhip = wantsWhipCheckBox.isChecked();
         String whipState = "Whipped Cream: " + wantsWhip;
-        Log.v("MainActivity", whipState);
 
         CheckBox wantsChocoCheckBox = (CheckBox) findViewById(R.id.chocoBox);
         boolean wantsChoco = wantsChocoCheckBox.isChecked();
         String chocoState = "Chocolate: " + wantsChoco;
-        Log.v("MainActivity", chocoState);
 
-        String priceMessage = whipState + "\n";
+        EditText editName = (EditText) findViewById(R.id.edit_text_name);
+
+        String priceMessage = "Name: " + editName.getText().toString() + "\n";
+        priceMessage += whipState + "\n";
         priceMessage += chocoState + "\n";
         priceMessage += "Quantity: " + quantity + "\n";
-        priceMessage += "Total: $" + price + ".00 \n";
+        priceMessage += "Total: $" + calcTotal() + ".00 \n";
         priceMessage +=  "Thank You!";
 
         TextView orderSummaryTextView = (TextView) findViewById(R.id.order_summary_text_view);
         orderSummaryTextView.setText(priceMessage);
+    }
+
+    public int calcTotal() {
+
+        CheckBox wantsWhipCheckBox = (CheckBox) findViewById(R.id.whipBox);
+        boolean wantsWhip = wantsWhipCheckBox.isChecked();
+
+        CheckBox wantsChocoCheckBox = (CheckBox) findViewById(R.id.chocoBox);
+        boolean wantsChoco = wantsChocoCheckBox.isChecked();
+
+        int extras = 0;
+        if (wantsWhip) { extras ++; }
+        if (wantsChoco) { extras += 2; }
+
+        Log.v("calcTotal","extras = " + extras);
+
+        return quantity * (5 + extras);
 
     }
 
     public void clearName(View view) {
 
         if (!nameTap) {
-            EditText nameText = (EditText) findViewById(R.id.editName);
+            EditText nameText = (EditText) findViewById(R.id.edit_text_name);
             nameText.setText("");
             nameTap = true;
         }
@@ -66,7 +81,13 @@ public class MainActivity extends ActionBarActivity {
 
     public void increment(View view) {
         quantity++;
-        displayQuantity(quantity);
+        displayQuantity();
+    }
+
+    //*** Called by onClick of the Extras Checkboxes to update total
+    public void extrasChanged(View view) {
+
+        displayQuantity();
     }
 
     public void decrement(View view) {
@@ -75,22 +96,20 @@ public class MainActivity extends ActionBarActivity {
             quantity--;
         }
 
-        displayQuantity(quantity);
+        displayQuantity();
     }
 
  //   * This method displays the given quantity value on the screen.
 
-    private void displayQuantity(int number) {
+    private void displayQuantity() {
         TextView quantityTextView = (TextView) findViewById(
                 R.id.quantity_text_view);
-        quantityTextView.setText("" + number);
+        quantityTextView.setText("" + quantity);
 
 //      If quantity is updated, go into Pre-Order State: Wipe Out Prev Order Info.
 
-        int price = quantity * 5;
-
         TextView orderSummaryTextView = (TextView) findViewById(R.id.order_summary_text_view);
-        orderSummaryTextView.setText("$" + price + ".00");
+        orderSummaryTextView.setText("$" + calcTotal() + ".00");
 
     }
 

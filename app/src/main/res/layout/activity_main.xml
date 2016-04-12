@@ -24,7 +24,7 @@
             android:text="Name"
             android:onClick="clearName"
             android:ems="10"
-            android:id="@+id/editName" />
+            android:id="@+id/edit_text_name" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -40,6 +40,7 @@
             android:layout_height="wrap_content"
             android:text="Whipped Cream"
             android:paddingLeft="24dp"
+            android:onClick="extrasChanged"
             android:textSize="16sp" />
 
         <CheckBox
@@ -48,6 +49,7 @@
             android:layout_height="wrap_content"
             android:text="Chocolate"
             android:paddingLeft="24dp"
+            android:onClick="extrasChanged"
             android:textSize="16sp" />
 
         <TextView
