@@ -16,7 +16,6 @@
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:paddingTop="@dimen/activity_vertical_margin">
 
-
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -27,12 +26,10 @@
             android:id="@+id/edit_text_name" />
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/HeaderTextStyle"
             android:paddingTop="8dp"
             android:paddingBottom="8dp"
-            android:text="TOPPINGS"
-            android:textSize="16dp" />
+            android:text="TOPPINGS" />
 
         <CheckBox
             android:id="@+id/whipBox"
@@ -53,8 +50,7 @@
             android:textSize="16sp" />
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/HeaderTextStyle"
             android:paddingTop="8dp"
             android:paddingBottom="8dp"
             android:text="QUANTITY"
@@ -101,15 +97,10 @@
         </LinearLayout>
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/HeaderTextStyle"
             android:paddingBottom="8dp"
             android:paddingTop="16dp"
-            android:text="Order Summary"
-            android:textStyle="bold"
-            android:textAllCaps="false"
-            android:textSize="16dp" />
-
+            android:text="Order Summary" />
 
         <TextView
             android:id="@+id/order_summary_text_view"
